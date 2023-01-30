@@ -1,0 +1,38 @@
+package testCase;
+
+import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import base.BaseTest;
+
+public class TestCases extends BaseTest{
+	
+	@Test(dataProvider="testdata")
+	public static void LoginTest(String username, String password) throws InterruptedException {
+		
+		System.out.println("Clicked successfully");
+		driver.findElement(By.linkText(loc.getProperty("signin_link"))).click();
+		driver.findElement(By.id(loc.getProperty("email_field"))).sendKeys(username);
+		driver.findElement(By.xpath(loc.getProperty("next_button"))).click();
+		Thread.sleep(4000);
+		driver.findElement(By.xpath(loc.getProperty("pwd_field"))).sendKeys(password);
+		Thread.sleep(4000);
+		//driver.findElement(By.id("password")).sendKeys("password123@M");
+		driver.findElement(By.xpath(loc.getProperty("login_next_button"))).click();
+		Thread.sleep(8000);
+		
+	}
+	
+	@DataProvider(name="testdata")
+	public Object[][] tData()
+	{
+		return new Object[][] {
+			{"rahman@gmail.com","password1"},
+			{"rahman64@gmail.com","pasrd123@M"},
+			{"rahmanrifat64@gmail.com","password123@M"}
+	};
+
+ }
+
+}	
